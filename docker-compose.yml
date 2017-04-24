@@ -1,0 +1,29 @@
+version: "3"
+services:
+  cas:
+    build: cas
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+#    volumes:
+#      - "./keys/cas.jks:/etc/cas/thekeystore:ro"
+  postgres:
+    image: "postgres:9"
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - "./postgres/initdb:/docker-entrypoint-initdb.d:ro"
+      - "./postgres/data:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+  apache:
+    build: apache
+    ports:
+      - "80:80"
+      - "443:443"
+#    volumes:
+#      - "./keys/cas.crt:/etc/ssl/certs/cas.crt:ro"
+#      - "./keys/cas.crt:/etc/ssl/certs/ca-certificates.crt:ro"
+#      - "./keys/cas.crt:/usr/share/ca-certificates/localhost/cas.crt:ro"
+#      - "./keys/apache.crt:/usr/local/apache2/conf/server.crt:ro"
+#      - "./keys/apache.key:/usr/local/apache2/conf/server.key:ro"
