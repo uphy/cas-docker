@@ -27,3 +27,8 @@ services:
 #      - "./keys/cas.crt:/usr/share/ca-certificates/localhost/cas.crt:ro"
 #      - "./keys/apache.crt:/usr/local/apache2/conf/server.crt:ro"
 #      - "./keys/apache.key:/usr/local/apache2/conf/server.key:ro"
+  nginx:
+    build: nginx
+    ports:
+      - "1080:80"
+      - "1443:443"
